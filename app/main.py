@@ -63,7 +63,7 @@ async def update_task(task_id: int, payload: TaskUpdate):
     return updated
 
 @app.delete("/tasks/{task_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_task(task_id):
+async def delete_task(task_id: int):
     if task_id not in tasks:
         raise HTTPException(status_code=404, detail="task not found")
     del tasks[task_id]
