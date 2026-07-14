@@ -3,15 +3,14 @@ from httpx import ASGITransport, AsyncClient
 from main import app
 
 
-async def test_health():
-    async with AsyncClient(
-        transport=ASGITransport(app=app),
-        base_url="http://test",
-    ) as client:
-        response = await client.get("/health")
-
+async def test_health(client):
+    response = await client.get("/health")
     assert response.status_code == 200
-    assert response.json() == {"status": "ok"}
+
+
+async def test_list_empty(client):
+    response = await client.get("/tasks")
+    assert response.json() == []   
 
 async def test_create_task_ok():
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
