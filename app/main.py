@@ -5,7 +5,7 @@ import asyncio
 app = FastAPI(title="TaskManager")
 
 class TaskCreate(BaseModel):
-    title: str = Field(min_lenght=1, max_length=200)
+    title: str = Field(min_length=1, max_length=200)
     description: str = Field(default='', max_length=1000)
 
 class Task(BaseModel):
@@ -15,7 +15,7 @@ class Task(BaseModel):
     done: bool = False
 
 class TaskUpdate(BaseModel):
-    title: str | None = Field(default=None, min_lenght=1, max_length=200)
+    title: str | None = Field(default=None, min_length=1, max_length=200)
     description: str | None = Field(default=None, max_length=1000)      
     done: bool | None = None
 
